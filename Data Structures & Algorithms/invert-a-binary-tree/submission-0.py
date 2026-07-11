@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+
+        from collections import deque
+        def dfs(root):
+            queue = deque()
+            res = []
+            if root:
+                queue.append(root)
+
+            while queue:
+                level = []
+                for i in range(len(queue)):
+                    curr = queue.popleft()
+                    curr.left, curr.right = curr.right, curr.left
+                    if curr.left:
+                        queue.append(curr.left)
+                    if curr.right:
+                        queue.append(curr.right)
+            return root
+
+        return dfs(root)
+
+
+                    
+
